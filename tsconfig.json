@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "outDir": "out",
+    "rootDir": "src",
+    "removeComments": true,
+    "allowJs": true,
+    "checkJs": true,
+
+    "strict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node"
+  }
+}

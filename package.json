@@ -1,0 +1,29 @@
+{
+  "name": "CodeAnalyzer",
+  "version": "0.1.0",
+  "description": "A minimal Electron application",
+  "main": "out/main.js",
+  "scripts": {
+    "clean": "rimraf out/ dist/",
+    "build": "tsc",
+    "html": "copyfiles -u 1 src/**/*.html src/**/*.css out/",
+    "prestart": "npm run build && npm run html",
+    "start": "electron .",
+    "dist": "electron-packager . --out=dist --overwrite --ignore=src --ignore=tsconfig.json --ignore=package-lock.json --ignore README.md"
+  },
+  "repository": "https://github.com/Samarkin/CodeAnalyzer",
+  "keywords": [
+    "source code",
+    "analysis"
+  ],
+  "author": "Pavel Samarkin",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "~1.6.2",
+    "copyfiles": "latest",
+    "rimraf": "latest"
+  },
+  "dependencies": {
+    "electron-packager": "^9.1.0"
+  }
+}
