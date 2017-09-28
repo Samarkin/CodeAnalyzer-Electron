@@ -41,6 +41,11 @@
         "isDefault": true
       },
       "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "clean",
+      "problemMatcher": []
     }
   ]
 }
