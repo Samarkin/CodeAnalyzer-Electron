@@ -1,0 +1,33 @@
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.button {
+  font-size: 12px;
+  background: #eff3f6;
+  color: rgba(27, 31, 35, 0.8);
+  border: 1px solid rgba(27, 31, 35, 0.2);
+  padding: 5px;
+}
+
+footer {
+  padding: 3px;
+}
+
+.button:hover {
+  background: #dfe3e6;
+}
+
+.button:active {
+  background: #79BBE7;
+}
+
+.ro-textbox {
+  background: #ffffff;
+  border: 1px solid rgba(27, 31, 35, 0.2);
+}
+
+footer {
+  font-size: 12px;
+  background: #dfdfdf;
+}
