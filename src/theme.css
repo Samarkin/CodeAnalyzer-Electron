@@ -31,3 +31,7 @@ footer {
   font-size: 12px;
   background: #dfdfdf;
 }
+
+.dragging {
+  background: rgba(121, 187, 231, 0.43);
+}
