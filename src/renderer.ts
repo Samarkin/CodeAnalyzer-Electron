@@ -7,21 +7,25 @@ let getBrowseButton = () => <HTMLButtonElement> document.getElementById('browse-
 let getSelectedFolderSpan = () => <HTMLDivElement> document.getElementById('selected-folder');
 let getContentDiv = () => <HTMLSpanElement> document.getElementById('content');
 let getStatusSpan = () => <HTMLSpanElement> document.getElementById('status');
+let getOverlayDiv = () => <HTMLDivElement> document.getElementById('overlay');
 
 function loadFiles(folder: string) {
   getSelectedFolderSpan().innerHTML = folder;
   ipcRenderer.send('folder-load', folder);
+  getOverlayDiv().classList.remove('hidden');
 }
 
 ipcRenderer.on('folder-loaded', function(event: Electron.IpcMessageEvent, arg: CodeFolderInfo) {
   let f = new CodeFolder(arg);
   getContentDiv().innerText = '' + f.totalFiles + " total files";
   getStatusSpan().innerText = 'Folder open: ' + f.path;
+  getOverlayDiv().classList.add('hidden');
 });
 
 ipcRenderer.on('folder-error', function(event: Electron.IpcMessageEvent, err: any) {
   getContentDiv().innerText = '';
   getStatusSpan().innerText = 'Failed to open a folder: ' + err;
+  getOverlayDiv().classList.add('hidden');
 });
 
 function browseClick() {
