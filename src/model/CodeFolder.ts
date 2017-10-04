@@ -1,42 +1,34 @@
 import {fs} from 'mz';
 
-export default class CodeFolder {
-  private _totalFiles: number
-  private _path: string;
+export interface CodeFolderInfo {
+  readonly totalFiles: number;
+  readonly path: string;
+}
 
-  private constructor() {
-  }
+export class CodeFolder implements CodeFolderInfo {
+  readonly totalFiles: number
+  readonly path: string;
 
-  static Deserialize(obj: any) {
-    let result = new CodeFolder();
-    if (!obj._path) {
+  constructor(obj: CodeFolderInfo) {
+    if (!obj.path) {
       throw new Error("Empty _path");
     }
-    result._path = obj._path;
-    if (obj._totalFiles !== 0 && !obj._totalFiles) {
+    if (obj.totalFiles !== 0 && !obj.totalFiles) {
       throw new Error("Empty _totalFiles");
     }
-    result._totalFiles = obj._totalFiles;
-    return result;
+    this.path = obj.path;
+    this.totalFiles = obj.totalFiles;
   }
 
-  static async Analyze(folder: string): Promise<CodeFolder> {
+  static async Analyze(folder: string): Promise<CodeFolderInfo> {
     let stat = await fs.stat(folder);
     if (!stat.isDirectory()) {
       throw new Error("Provided folder path is invalid");
     }
-    let result = new CodeFolder();
     let files = await fs.readdir(folder);
-    result._totalFiles = files.length;
-    result._path = folder;
-    return result;
-  }
-
-  get totalFiles(): number {
-    return this._totalFiles;
-  }
-
-  get path(): string {
-    return this._path;
+    return {
+      totalFiles: files.length,
+      path: folder
+    }
   }
 }

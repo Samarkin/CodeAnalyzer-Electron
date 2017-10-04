@@ -1,5 +1,5 @@
 import {app, BrowserWindow, ipcMain} from 'electron';
-import CodeFolder from './model/CodeFolder';
+import {CodeFolder} from './model/CodeFolder';
 import path = require('path');
 import url = require('url');
 

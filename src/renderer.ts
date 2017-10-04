@@ -1,5 +1,5 @@
 import {remote, ipcRenderer} from 'electron';
-import CodeFolder from './model/CodeFolder';
+import {CodeFolder, CodeFolderInfo} from './model/CodeFolder';
 import fs = require('fs');
 import path = require('path');
 
@@ -13,8 +13,8 @@ function loadFiles(folder: string) {
   ipcRenderer.send('folder-load', folder);
 }
 
-ipcRenderer.on('folder-loaded', function(event: Electron.IpcMessageEvent, arg: any) {
-  let f = CodeFolder.Deserialize(arg);
+ipcRenderer.on('folder-loaded', function(event: Electron.IpcMessageEvent, arg: CodeFolderInfo) {
+  let f = new CodeFolder(arg);
   getContentDiv().innerText = '' + f.totalFiles + " total files";
   getStatusSpan().innerText = 'Folder open: ' + f.path;
 });
