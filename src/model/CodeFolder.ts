@@ -1,4 +1,5 @@
 import {fs} from 'mz';
+import path = require('path');
 
 export interface CodeFolderInfo {
   readonly totalFiles: number;
@@ -25,7 +26,21 @@ export class CodeFolder implements CodeFolderInfo {
     if (!stat.isDirectory()) {
       throw new Error("Provided folder path is invalid");
     }
-    let files = await fs.readdir(folder);
+    let folders = [folder];
+    let files: string[] = [];
+    while (folders.length > 0) {
+      let folder = folders.pop()!
+      for (let filename of await fs.readdir(folder)) {
+          let file = path.join(folder, filename);
+          let stat = await fs.stat(file);
+          if (stat.isDirectory()) {
+            folders.push(file);
+          }
+          else if (stat.isFile()) {
+            files.push(file);
+          }
+        }
+      }
     return {
       totalFiles: files.length,
       path: folder
