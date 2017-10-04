@@ -1,15 +1,28 @@
-import {remote} from 'electron';
+import {remote, ipcRenderer} from 'electron';
+import CodeFolder from './model/CodeFolder';
 import fs = require('fs');
 import path = require('path');
 
 let getBrowseButton = () => <HTMLButtonElement> document.getElementById('browse-button');
 let getSelectedFolderSpan = () => <HTMLDivElement> document.getElementById('selected-folder');
 let getContentDiv = () => <HTMLSpanElement> document.getElementById('content');
-//let getStatusSpan = () => <HTMLSpanElement> document.getElementById('status');
+let getStatusSpan = () => <HTMLSpanElement> document.getElementById('status');
 
 function loadFiles(folder: string) {
   getSelectedFolderSpan().innerHTML = folder;
+  ipcRenderer.send('folder-load', folder);
 }
+
+ipcRenderer.on('folder-loaded', function(event: Electron.IpcMessageEvent, arg: any) {
+  let f = CodeFolder.Deserialize(arg);
+  getContentDiv().innerText = '' + f.totalFiles + " total files";
+  getStatusSpan().innerText = 'Folder open: ' + f.path;
+});
+
+ipcRenderer.on('folder-error', function(event: Electron.IpcMessageEvent, err: any) {
+  getContentDiv().innerText = '';
+  getStatusSpan().innerText = 'Failed to open a folder: ' + err;
+});
 
 function browseClick() {
   remote.dialog.showOpenDialog({
