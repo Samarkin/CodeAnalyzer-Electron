@@ -59,6 +59,6 @@ ipcMain.on('folder-load', function (event: Electron.IpcMessageEvent, path: strin
       event.sender.send('folder-loaded', f);
     })
     .catch(err => {
-      event.sender.send('folder-error', 'ololo'  + err);
+      event.sender.send('folder-error', ''  + err);
     })
 });
