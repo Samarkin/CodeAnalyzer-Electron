@@ -2,7 +2,7 @@ const path = require('path')
 const appName = 'CodeAnalyzer';
 
 before(function() {
-  const rootPath = path.join(__dirname, '../../..');
+  const rootPath = path.join(__dirname, '../..');
   const distPath = path.join(rootPath, 'dist');
   if (process.platform === 'darwin') {
     const appRoot = path.join(distPath, `${appName}-${process.platform}-${process.arch}/${appName}.app`);

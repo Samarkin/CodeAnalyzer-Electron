@@ -4,6 +4,6 @@ const path = require('path')
 before(function() {
   this.electronAppOptions = {
     path: electronPath,
-    args: [path.join(__dirname, '../../..')]
+    args: [path.join(__dirname, '../..')]
   };
 })
