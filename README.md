@@ -10,9 +10,9 @@ To clone and run this repository you'll need [Git](https://git-scm.com) and [Nod
 # Install TypeScript (if you haven't done it already)
 npm install -g typescript
 # Clone this repository
-git clone https://github.com/Samarkin/CodeAnalyzer
+git clone https://github.com/Samarkin/CodeAnalyzer-Electron
 # Go into the repository
-cd CodeAnalyzer
+cd CodeAnalyzer-Electron
 # Install dependencies
 npm install
 # Run the app

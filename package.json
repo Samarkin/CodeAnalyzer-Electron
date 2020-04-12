@@ -11,7 +11,7 @@
     "start": "electron .",
     "dist": "electron-packager . --out=dist --overwrite --ignore=src --ignore=tsconfig.json --ignore=package-lock.json --ignore README.md"
   },
-  "repository": "https://github.com/Samarkin/CodeAnalyzer",
+  "repository": "https://github.com/Samarkin/CodeAnalyzer-Electron",
   "keywords": [
     "source code",
     "analysis"
