@@ -6,8 +6,7 @@
     "outDir": "out",
     "rootDir": "src",
     "removeComments": true,
-    "allowJs": true,
-    "checkJs": true,
+    "allowJs": false,
 
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": true,

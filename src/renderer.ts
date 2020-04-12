@@ -1,5 +1,4 @@
 import {remote, ipcRenderer, OpenDialogReturnValue} from 'electron';
-import {CodeFolder, CodeFolderInfo} from './model/CodeFolder';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -15,10 +14,9 @@ function loadFiles(folder: string) {
   getOverlayDiv().classList.remove('hidden');
 }
 
-ipcRenderer.on('folder-loaded', function(event: Electron.IpcRendererEvent, arg: CodeFolderInfo) {
-  let f = new CodeFolder(arg);
-  getContentDiv().innerText = '' + f.totalFiles + " total files";
-  getStatusSpan().innerText = 'Folder open: ' + f.path;
+ipcRenderer.on('folder-loaded', function(event: Electron.IpcRendererEvent, arg: any) {
+  getContentDiv().innerText = '' + arg.totalFiles + " total files";
+  getStatusSpan().innerText = 'Folder open: ' + arg.path;
   getOverlayDiv().classList.add('hidden');
 });
 

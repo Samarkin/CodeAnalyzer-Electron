@@ -5,11 +5,11 @@
   "main": "out/main.js",
   "scripts": {
     "clean": "rimraf out/ dist/",
-    "build": "tsc && npm run html",
+    "build": "webpack --config ./webpack.config.js && npm run html",
     "html": "copyfiles -u 1 src/**/*.html src/**/*.css out/",
     "prestart": "npm run build",
     "start": "electron .",
-    "dist": "electron-packager . --out=dist --overwrite --ignore=src --ignore=tsconfig.json --ignore=package-lock.json --ignore README.md"
+    "dist": "electron-packager . --out=dist --overwrite --ignore=src --ignore=tsconfig.json --ignore=webpack.config.js --ignore=package-lock.json --ignore README.md"
   },
   "repository": "https://github.com/Samarkin/CodeAnalyzer-Electron",
   "keywords": [
@@ -23,6 +23,9 @@
     "typescript": "^3.8.3",
     "copyfiles": "latest",
     "electron": "^8.2.1",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "ts-loader": "^6.2.2",
     "rimraf": "latest"
   },
   "dependencies": {

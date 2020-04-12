@@ -1,7 +1,5 @@
 import {app, BrowserWindow, ipcMain} from 'electron';
 import {CodeFolder} from './model/CodeFolder';
-import * as path from 'path';
-import * as url from 'url';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -9,14 +7,16 @@ let mainWindow: Electron.BrowserWindow | null
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  })
 
   // and load the index.html of the app.
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
+  mainWindow.loadFile('out/index.html');
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
