@@ -1,6 +1,7 @@
 import {remote, ipcRenderer, OpenDialogReturnValue} from 'electron';
 import * as fs from 'fs';
 import * as path from 'path';
+import { CodeFolderInfo } from '../common/CodeFolder';
 
 let getBrowseButton = () => <HTMLButtonElement> document.getElementById('browse-button');
 let getSelectedFolderSpan = () => <HTMLDivElement> document.getElementById('selected-folder');
@@ -14,7 +15,7 @@ function loadFiles(folder: string) {
   getOverlayDiv().classList.remove('hidden');
 }
 
-ipcRenderer.on('folder-loaded', function(event: Electron.IpcRendererEvent, arg: any) {
+ipcRenderer.on('folder-loaded', function(event: Electron.IpcRendererEvent, arg: CodeFolderInfo) {
   getContentDiv().innerText = '' + arg.totalFiles + " total files";
   getStatusSpan().innerText = 'Folder open: ' + arg.path;
   getOverlayDiv().classList.add('hidden');

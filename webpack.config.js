@@ -4,7 +4,7 @@ module.exports = [
   {
     mode: 'development',
     devtool: 'source-map',
-    entry: './src/main.ts',
+    entry: './src/main/main.ts',
     target: 'electron-main',
     module: {
       rules: [{
@@ -24,7 +24,7 @@ module.exports = [
   {
     mode: 'development',
     devtool: 'source-map',
-    entry: './src/renderer.ts',
+    entry: './src/renderer/renderer.ts',
     target: 'electron-renderer',
     module: {
       rules: [{
@@ -42,7 +42,7 @@ module.exports = [
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './src/index.html'
+        template: './src/renderer/index.html'
       })
     ]
   }

@@ -1,15 +1,6 @@
 import {fs} from 'mz';
 import * as path from 'path';
-
-export interface CodeFolderInfo {
-  readonly totalFiles: number;
-  readonly path: string;
-  readonly filesByExt: FilesByExtMap;
-}
-
-interface FilesByExtMap {
-  [ext: string] : number|undefined;
-}
+import { CodeFolderInfo, FilesByExtMap } from '../common/CodeFolder';
 
 export class CodeFolder implements CodeFolderInfo {
   readonly totalFiles: number
