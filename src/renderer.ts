@@ -1,7 +1,7 @@
-import {remote, ipcRenderer} from 'electron';
+import {remote, ipcRenderer, OpenDialogReturnValue} from 'electron';
 import {CodeFolder, CodeFolderInfo} from './model/CodeFolder';
-import fs = require('fs');
-import path = require('path');
+import * as fs from 'fs';
+import * as path from 'path';
 
 let getBrowseButton = () => <HTMLButtonElement> document.getElementById('browse-button');
 let getSelectedFolderSpan = () => <HTMLDivElement> document.getElementById('selected-folder');
@@ -15,27 +15,27 @@ function loadFiles(folder: string) {
   getOverlayDiv().classList.remove('hidden');
 }
 
-ipcRenderer.on('folder-loaded', function(event: Electron.IpcMessageEvent, arg: CodeFolderInfo) {
+ipcRenderer.on('folder-loaded', function(event: Electron.IpcRendererEvent, arg: CodeFolderInfo) {
   let f = new CodeFolder(arg);
   getContentDiv().innerText = '' + f.totalFiles + " total files";
   getStatusSpan().innerText = 'Folder open: ' + f.path;
   getOverlayDiv().classList.add('hidden');
 });
 
-ipcRenderer.on('folder-error', function(event: Electron.IpcMessageEvent, err: any) {
+ipcRenderer.on('folder-error', function(event: Electron.IpcRendererEvent, err: any) {
   getContentDiv().innerText = '';
   getStatusSpan().innerText = 'Failed to open a folder: ' + err;
   getOverlayDiv().classList.add('hidden');
 });
 
 function browseClick() {
-  remote.dialog.showOpenDialog({
+  remote.dialog.showOpenDialog(remote.getCurrentWindow(), {
     properties: ['openDirectory']
-  }, function (files: string[] | undefined) {
-    if (!files) {
+  }).then(function (v: OpenDialogReturnValue) {
+    if (v.canceled) {
       return;
     }
-    let folder = files[0];
+    let folder = v.filePaths[0];
     if (!folder) {
       return;
     }
@@ -43,17 +43,17 @@ function browseClick() {
   })
 }
 
-function getFolder(filepath: string, callback: (err: NodeJS.ErrnoException, folder?: string) => void) {
+function getFolder(filepath: string, callback: (err?: NodeJS.ErrnoException, folder?: string) => void) {
   fs.stat(filepath, (err, stats) => {
     if (err) {
       callback(err);
       return;
     }
     if (!stats.isDirectory()) {
-       callback(err, path.dirname(filepath));
+       callback(undefined, path.dirname(filepath));
     }
     else {
-      callback(err, filepath);
+      callback(undefined, filepath);
     }
   });
 }
@@ -64,7 +64,7 @@ document.ondragover = document.ondrop = (event) => {
   event.preventDefault();
 };
 
-window.onload = (event) => {
+window.onload = () => {
   getBrowseButton().addEventListener('click', browseClick);
 
   getContentDiv().addEventListener('dragenter', ev => {
@@ -78,6 +78,9 @@ window.onload = (event) => {
   getContentDiv().addEventListener('drop', ev => {
     ev.preventDefault();
     getContentDiv().classList.remove('dragging');
+    if (!ev.dataTransfer) {
+      return;
+    }
     let path = ev.dataTransfer.files[0].path;
     getFolder(path, (err, folder) => {
       if (!err && folder) {

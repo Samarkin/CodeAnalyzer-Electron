@@ -19,13 +19,15 @@
   "author": "Pavel Samarkin",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "~1.6.2",
+    "@types/node": "^12",
+    "typescript": "^3.8.3",
     "copyfiles": "latest",
+    "electron": "^8.2.1",
     "rimraf": "latest"
   },
   "dependencies": {
     "@types/mz": "0.0.32",
-    "electron-packager": "^9.1.0",
+    "electron-packager": "^14.2.1",
     "mz": "^2.7.0"
   }
 }

@@ -1,5 +1,5 @@
 import {fs} from 'mz';
-import path = require('path');
+import * as path from 'path';
 
 export interface CodeFolderInfo {
   readonly totalFiles: number;

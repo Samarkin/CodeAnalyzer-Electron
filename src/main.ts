@@ -1,7 +1,7 @@
 import {app, BrowserWindow, ipcMain} from 'electron';
 import {CodeFolder} from './model/CodeFolder';
-import path = require('path');
-import url = require('url');
+import * as path from 'path';
+import * as url from 'url';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -52,13 +52,14 @@ app.on('activate', function () {
   }
 })
 
-ipcMain.on('folder-load', function (event: Electron.IpcMessageEvent, path: string) {
+ipcMain.on('folder-load', function (event: Electron.IpcMainEvent, ...args: any[]) {
+  const path = args[0];
   CodeFolder.Analyze(path)
     .then(f => {
       console.log(`There is ${f.totalFiles} files in ${f.path}`);
-      event.sender.send('folder-loaded', f);
+      event.reply('folder-loaded', f);
     })
     .catch(err => {
-      event.sender.send('folder-error', ''  + err);
+      event.reply('folder-error', ''  + err);
     })
 });

@@ -5,6 +5,7 @@
     <title>Code Analyzer</title>
     <link rel="stylesheet" type="text/css" href="layout.css"/>
     <link rel="stylesheet" type="text/css" href="theme.css"/>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
   </head>
   <body>
     <header>
@@ -19,7 +20,5 @@
     </div>
     <footer id="status">Status text</footer>
   </body>
-  <script>
-    require("./renderer.js")
-  </script>
+  <script src="./renderer.js"></script>
 </html>
