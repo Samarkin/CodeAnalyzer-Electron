@@ -1,3 +1,5 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = [
   {
     mode: 'development',
@@ -37,6 +39,11 @@ module.exports = [
     output: {
       path: __dirname + '/out',
       filename: 'renderer.js'
-    }
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: './src/index.html'
+      })
+    ]
   }
 ];

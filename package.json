@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf out/ dist/",
     "build": "webpack --config ./webpack.config.js && npm run html",
-    "html": "copyfiles -u 1 src/**/*.html src/**/*.css out/",
+    "html": "copyfiles -u 1 src/**/*.css out/",
     "prestart": "npm run build",
     "start": "electron .",
     "dist": "electron-packager . --out=dist --overwrite --ignore=src --ignore=tsconfig.json --ignore=webpack.config.js --ignore=package-lock.json --ignore README.md"
@@ -26,7 +26,8 @@
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "ts-loader": "^6.2.2",
-    "rimraf": "latest"
+    "rimraf": "latest",
+    "html-webpack-plugin": "^4.2.0"
   },
   "dependencies": {
     "@types/mz": "0.0.32",
