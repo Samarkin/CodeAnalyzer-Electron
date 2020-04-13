@@ -23,32 +23,32 @@ export class CodeFolder implements CodeFolderInfo {
   }
 
   static async Analyze(folder: string): Promise<CodeFolderInfo> {
-    let stat = await fs.stat(folder);
+    const stat = await fs.stat(folder);
     if (!stat.isDirectory()) {
       throw new Error("Provided folder path is invalid");
     }
-    let folders = [folder];
-    let files: string[] = [];
-    let filesByExt: FilesByExtMap = {};
+    const folders = [folder];
+    const files: string[] = [];
+    const filesByExt: FilesByExtMap = {};
     while (folders.length > 0) {
-      let folder = folders.pop()!;
-      for (let filename of await fs.readdir(folder)) {
-          let file = path.join(folder, filename);
-          let stat = await fs.stat(file);
-          if (stat.isDirectory()) {
-            folders.push(file);
-          }
-          else if (stat.isFile()) {
-            files.push(file);
-            let ext = path.extname(file);
-            filesByExt[ext] = (filesByExt[ext] || 0) + 1;
-          }
+      const folder = folders.pop()!;
+      for (const filename of await fs.readdir(folder)) {
+        const file = path.join(folder, filename);
+        const stat = await fs.stat(file);
+        if (stat.isDirectory()) {
+          folders.push(file);
+        }
+        else if (stat.isFile()) {
+          files.push(file);
+          const ext = path.extname(file);
+          filesByExt[ext] = (filesByExt[ext] || 0) + 1;
         }
       }
+    }
     return {
       totalFiles: files.length,
       path: folder,
       filesByExt: filesByExt,
-    }
+    };
   }
 }

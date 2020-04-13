@@ -1,5 +1,5 @@
 export interface FilesByExtMap {
-  [ext: string] : number|undefined;
+  [ext: string]: number|undefined;
 }
 
 export interface CodeFolderInfo {

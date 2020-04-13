@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "clean": "rimraf out/ dist/",
-    "build": "webpack --config ./webpack.config.js && npm run html",
+    "build": "webpack --config ./webpack.config.ts && npm run html",
     "html": "copyfiles -u 2 src/renderer/**/*.css out/",
     "prestart": "npm run build",
     "start": "electron .",
@@ -28,8 +28,12 @@
   "devDependencies": {
     "@types/mocha": "^7.0.2",
     "@types/node": "^12",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
     "copyfiles": "latest",
     "electron": "^8.2.1",
+    "eslint": "^6.8.0",
+    "eslint-loader": "^4.0.0",
     "html-webpack-plugin": "^4.2.0",
     "mocha": "^7.1.1",
     "rimraf": "latest",

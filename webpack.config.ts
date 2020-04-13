@@ -1,4 +1,4 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 
 module.exports = [
   {
@@ -10,16 +10,16 @@ module.exports = [
       rules: [{
         test: /\.ts$/,
         include: /src/,
-        use: 'ts-loader'
-      }]
+        use: ['ts-loader','eslint-loader'],
+      }],
     },
     resolve: {
-      extensions: ['.js','.ts']
+      extensions: ['.js','.ts'],
     },
     output: {
       path: __dirname + '/out',
-      filename: 'main.js'
-    }
+      filename: 'main.js',
+    },
   },
   {
     mode: 'development',
@@ -30,20 +30,20 @@ module.exports = [
       rules: [{
         test: /\.ts$/,
         include: /src/,
-        use: 'ts-loader'
-      }]
+        use: ['ts-loader','eslint-loader'],
+      }],
     },
     resolve: {
-      extensions: ['.js','.ts']
+      extensions: ['.js','.ts'],
     },
     output: {
       path: __dirname + '/out',
-      filename: 'renderer.js'
+      filename: 'renderer.js',
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './src/renderer/index.html'
-      })
-    ]
-  }
+        template: './src/renderer/index.html',
+      }),
+    ],
+  },
 ];
