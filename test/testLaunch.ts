@@ -1,5 +1,5 @@
-const Application = require('spectron').Application
-require('should');
+import {Application} from 'spectron';
+import 'should';
 
 describe('Application launch', function () {
   this.timeout(10000)

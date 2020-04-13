@@ -1,5 +1,5 @@
-const electronPath = require('electron')
-const path = require('path')
+import * as electronPath from 'electron';
+import * as path from 'path';
 
 before(function() {
   this.electronAppOptions = {

@@ -11,10 +11,10 @@
     "prestart": "npm run build",
     "start": "electron .",
     "dist": "electron-packager . --out=dist --overwrite --ignore=src --ignore=tsconfig.json --ignore=webpack.config.js --ignore=package-lock.json --ignore README.md",
-    "e2e-test": "mocha --file test/env/dev.js --recursive --exclude 'test/env/*.js'",
-    "unit-test": "mocha --extension ts --require ts-node/register src/**/*.spec.ts",
+    "e2e-test": "mocha --file test/env/dev.ts --recursive --exclude 'test/env/*.ts'",
+    "unit-test": "mocha src/**/*.spec.ts",
     "test": "npm run unit-test && npm run e2e-test",
-    "dist-test": "mocha --file test/env/dist.js --recursive --exclude 'test/env/*.js'",
+    "dist-test": "mocha --file test/env/dist.ts --recursive --exclude 'test/env/*.ts'",
     "predist": "npm run unit-test",
     "postdist": "npm run dist-test"
   },
