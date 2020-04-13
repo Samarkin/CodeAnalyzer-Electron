@@ -24,17 +24,23 @@ module.exports = [
   {
     mode: 'development',
     devtool: 'source-map',
-    entry: './src/renderer/renderer.ts',
+    entry: './src/renderer/renderer.tsx',
     target: 'electron-renderer',
     module: {
-      rules: [{
-        test: /\.ts$/,
-        include: /src/,
-        use: ['ts-loader','eslint-loader'],
-      }],
+      rules: [
+        {
+          test: /\.ts(x?)$/,
+          include: /src/,
+          use: ['ts-loader','eslint-loader'],
+        },
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader'],
+        },
+      ],
     },
     resolve: {
-      extensions: ['.js','.ts'],
+      extensions: ['.js','.ts','.tsx'],
     },
     output: {
       path: __dirname + '/out',
