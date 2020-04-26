@@ -1,5 +1,13 @@
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as webpack from 'webpack';
+// TODO: Investigate why custom .d.ts don't work
+// eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
+const createElectronReloadWebpackPlugin = require('electron-reload-webpack-plugin');
+
+const ElectronReloadWebpackPlugin = createElectronReloadWebpackPlugin({
+  path:'./',
+  logLevel: 0,
+});
 
 const configs: Array<webpack.Configuration> = [
   {
@@ -21,6 +29,10 @@ const configs: Array<webpack.Configuration> = [
       path: __dirname + '/out',
       filename: 'main.js',
     },
+    plugins: [
+      ElectronReloadWebpackPlugin(),
+    ],
+    watch: true,
   },
   {
     mode: 'development',
@@ -51,7 +63,9 @@ const configs: Array<webpack.Configuration> = [
       new HtmlWebpackPlugin({
         template: './src/renderer/index.html',
       }),
+      ElectronReloadWebpackPlugin(),
     ],
+    watch: true,
   },
 ];
 

@@ -1,5 +1,6 @@
 import {app, BrowserWindow, ipcMain} from 'electron';
 import {CodeFolder} from './CodeFolder';
+import {client} from 'electron-connect';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -28,6 +29,9 @@ function createWindow(): void {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  // auto-reload 
+  client.create(mainWindow); 
 }
 
 // This method will be called when Electron has finished
