@@ -17,7 +17,7 @@ function createWindow(): void {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile('out/index.html');
+  mainWindow.loadFile('index.html');
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -30,8 +30,10 @@ function createWindow(): void {
     mainWindow = null;
   });
 
-  // auto-reload 
-  client.create(mainWindow); 
+  if (__DEVMODE__) {
+    // Enable auto-reload 
+    client.create(mainWindow); 
+  }
 }
 
 // This method will be called when Electron has finished

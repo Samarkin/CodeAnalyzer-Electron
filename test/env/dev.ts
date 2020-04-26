@@ -4,6 +4,6 @@ import * as path from 'path';
 before(function () {
   this.electronAppOptions = {
     path: electronPath,
-    args: [path.join(__dirname, '../..')],
+    args: [path.join(__dirname, '..', '..', 'out')],
   };
 });

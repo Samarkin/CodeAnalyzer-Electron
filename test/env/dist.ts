@@ -2,7 +2,7 @@ import * as path from 'path';
 const appName = 'CodeAnalyzer';
 
 before(function () {
-  const rootPath = path.join(__dirname, '../..');
+  const rootPath = path.join(__dirname, '..', '..');
   const distPath = path.join(rootPath, 'dist');
   let electronPath: string;
   let packagePath: string;
