@@ -7,8 +7,6 @@ Can collect various statistics about your source code.
 To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
 ```bash
-# Install TypeScript (if you haven't done it already)
-npm install -g typescript
 # Clone this repository
 git clone https://github.com/Samarkin/CodeAnalyzer-Electron
 # Go into the repository
