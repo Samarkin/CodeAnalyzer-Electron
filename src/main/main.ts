@@ -52,8 +52,7 @@ app.on('activate', function () {
   }
 });
 
-ipcMain.on('folder-load', function (event: Electron.IpcMainEvent, ...args: any[]) {
-  const path = args[0];
+ipcMain.on('folder-load', function (event: Electron.IpcMainEvent, path: string) {
   CodeFolder.Analyze(path)
     .then(f => {
       console.log(`There is ${f.totalFiles} files in ${f.path}`);

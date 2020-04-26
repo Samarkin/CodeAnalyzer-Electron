@@ -37,6 +37,7 @@
     "semi": ["error", "always"],
     "@typescript-eslint/explicit-function-return-type": ["error"],
     "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/no-require-imports": ["error"],
     "comma-dangle": ["error", "always-multiline"],
     "space-in-parens": ["error", "never"],
     "keyword-spacing": ["error"],

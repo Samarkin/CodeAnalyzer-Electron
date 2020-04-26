@@ -30,10 +30,10 @@ export class CodeFolder implements CodeFolderInfo {
     const folders = [folder];
     const files: string[] = [];
     const filesByExt: FilesByExtMap = {};
-    while (folders.length > 0) {
-      const folder = folders.pop()!;
-      for (const filename of await fs.readdir(folder)) {
-        const file = path.join(folder, filename);
+    let f: string | undefined;
+    while ((f = folders.pop())) {
+      for (const filename of await fs.readdir(f)) {
+        const file = path.join(f, filename);
         const stat = await fs.stat(file);
         if (stat.isDirectory()) {
           folders.push(file);
