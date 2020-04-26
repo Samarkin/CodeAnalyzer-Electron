@@ -11,10 +11,9 @@
     "e2e-test": "mocha --file test/env/dev.ts --recursive --exclude 'test/env/*.ts'",
     "unit-test": "mocha src/**/*.spec.ts",
     "test": "npm run unit-test && npm run build && npm run e2e-test",
-    "dist-test": "mocha --file test/env/dist.ts --recursive --exclude 'test/env/*.ts'",
     "predist": "npm run unit-test && webpack --env.mode=dist",
     "dist": "electron-packager dist/tmp --out=dist --overwrite",
-    "postdist": "npm run dist-test"
+    "postdist": "mocha --file test/env/dist.ts --recursive test/smoke"
   },
   "repository": "https://github.com/Samarkin/CodeAnalyzer-Electron",
   "keywords": [
