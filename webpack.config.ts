@@ -1,6 +1,7 @@
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+import * as webpack from 'webpack';
 
-module.exports = [
+const configs: Array<webpack.Configuration> = [
   {
     mode: 'development',
     devtool: 'source-map',
@@ -53,3 +54,5 @@ module.exports = [
     ],
   },
 ];
+
+export default configs;
